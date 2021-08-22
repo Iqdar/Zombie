@@ -12,6 +12,8 @@ contract ZombieFactory is Ownable{
         uint dna;
         uint32 level;
         uint32 readyTime;
+        uint16 winCount;
+        uint16 lossCount;
     }
 
     event NewZombie(
@@ -19,7 +21,9 @@ contract ZombieFactory is Ownable{
         string name,
         uint dna,
         uint32 level,
-        uint32 readyTime
+        uint32 readyTime,
+        uint16 winCount,
+        uint16 lossCount
     );
 
 //For storing zombie
@@ -46,8 +50,8 @@ contract ZombieFactory is Ownable{
         totalZombies++;
         zombieOwner[totalZombies] = msg.sender;
         ownerZombieCount[msg.sender]++;
-        zombies[totalZombies] = Zombie(totalZombies,_name,dna, 1, uint32(now + cooldownTime));
-        emit NewZombie(totalZombies,_name,dna, 1, uint32(now + cooldownTime));
+        zombies[totalZombies] = Zombie(totalZombies,_name,dna, 1, uint32(now + cooldownTime),0,0);
+        emit NewZombie(totalZombies,_name,dna, 1, uint32(now + cooldownTime),0,0);
     }
 
 //Function to generate dna from text
