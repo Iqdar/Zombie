@@ -111,15 +111,20 @@ class App extends Component {
                 </div>
             </form>
             <p>&nbsp;</p>
-            {}
-            <h3><b>Last added: </b>{zombie.name}</h3>
+            {this.state.totalZombies>0
+            ?
+            <div><h3><b>Last added: </b>{zombie.name}</h3>
             <h3><b>Head Genre</b> {zombie.dna.substring(0, 2) % 7 + 1}</h3>
             <h3><b>Eye Genre</b> {zombie.dna.substring(2, 4) % 11 + 1}</h3>
             <h3><b>Shirt Genre</b> {zombie.dna.substring(4, 6) % 6 + 1}</h3>
             <h3><b>Skin Color Genre</b> {parseInt(zombie.dna.substring(6, 8) / 100 * 360)}</h3>
             <h3><b>Eye Color Genre</b> {parseInt(zombie.dna.substring(8, 10) / 100 * 360)}</h3>
             <h3><b>Clothes Color Genre</b> {parseInt(zombie.dna.substring(10, 12) / 100 * 360)}</h3>
-      </div>
+            </div>
+            :
+            <div></div>
+            }
+        </div>
       }
       </div>
     );
