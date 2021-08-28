@@ -1,8 +1,13 @@
 pragma solidity >=0.5.12;
 
 import "./Ownable.sol";
+import './SafeMath.sol';
 
 contract ZombieFactory is Ownable{
+
+    using SafeMath for uint256;
+    using SafeMath32 for uint32;
+    using SafeMath16 for uint16;
 
     uint public totalZombies = 0;
 
@@ -49,7 +54,7 @@ contract ZombieFactory is Ownable{
     	require((bytes(_name).length > 0) && (ownerZombieCount[msg.sender] == 0));
         totalZombies++;
         zombieOwner[totalZombies] = msg.sender;
-        ownerZombieCount[msg.sender]++;
+        ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].add(1);
         zombies[totalZombies] = Zombie(totalZombies,_name,dna, 1, uint32(now + cooldownTime),0,0);
         emit NewZombie(totalZombies,_name,dna, 1, uint32(now + cooldownTime),0,0);
     }
